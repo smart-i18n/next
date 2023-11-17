@@ -1,0 +1,36 @@
+{
+  "name": "@smart-i18n/next",
+  "version": "0.0.0",
+  "description": "Smart i18n library for Next.js",
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "translation",
+    "multilinual",
+    "multi-linual"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smart-i18n/next.git"
+  },
+  "license": "MIT",
+  "author": "S. Mahdi Mir-Ismaili <s.m.mirismaili@gmail.com>",
+  "type": "module",
+  "main": "dist/main.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "patch-version": "npm version patch --no-git-tag-version",
+    "increase-minor-version": "npm version minor --no-git-tag-version",
+    "increase-major-version": "npm version major --no-git-tag-version",
+    "tag-this-version": "node -e \"require('child_process').execSync('git tag v' + require('./package.json').version)\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "~5.2.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
