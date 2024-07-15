@@ -1,13 +1,17 @@
 {
   "name": "@smart-i18n/next",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Smart i18n library for Next.js",
   "keywords": [
     "i18n",
     "internationalization",
     "translation",
     "multilinual",
-    "multi-linual"
+    "multi-linual",
+    "next.js",
+    "next-js",
+    "nextjs",
+    "next"
   ],
   "repository": {
     "type": "git",
@@ -15,22 +19,71 @@
   },
   "license": "MIT",
   "author": "S. Mahdi Mir-Ismaili <s.m.mirismaili@gmail.com>",
-  "type": "module",
-  "main": "dist/main.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "watch": "tsc --watch",
+    "prettier:check": "prettier --check .",
+    "prettier:format": "prettier --write .",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version",
+    "version:tag": "node -e \"require('child_process').execSync('git tag v' + require('./package.json').version)\"",
+    "prepublishOnly": "npm run prettier:format && npm run build"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./default-types": {
+      "types": "./types.d.ts"
+    },
+    ".": {
+      "react-server": "./dist/server/index.js",
+      "default": "./dist/client/index.js"
+    },
+    "./Locale": "./dist/Locale.js",
+    "./client": "./dist/client/index.js",
+    "./utils": "./dist/utils.js",
+    "./init": "./dist/init.js",
+    "./config": "./dist/config.js",
+    "./I18nProvider": "./dist/client/I18nProvider.js",
+    "./useI18n": {
+      "react-server": "./dist/server/useI18n.js",
+      "default": "./dist/client/useI18n.js"
+    },
+    "./Link": {
+      "react-server": "./dist/server/Link.js",
+      "default": "./dist/client/Link.js"
+    },
+    "./withTranslation": {
+      "react-server": "./dist/server/withTranslation.js",
+      "default": "./dist/client/withTranslation.js"
+    },
+    "./i18n-context": {
+      "react-server": "./dist/server/i18n-context.js",
+      "default": "./dist/client/i18n-context.js"
+    }
+  },
   "files": [
+    "types.d.ts",
     "dist"
   ],
-  "scripts": {
-    "patch-version": "npm version patch --no-git-tag-version",
-    "increase-minor-version": "npm version minor --no-git-tag-version",
-    "increase-major-version": "npm version major --no-git-tag-version",
-    "tag-this-version": "node -e \"require('child_process').execSync('git tag v' + require('./package.json').version)\""
+  "dependencies": {
+    "anstyle": "2.1.3",
+    "objectools": "^3.1.0"
   },
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "~5.2.2"
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "prettier": "~3.3.2",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "typescript": "~5.5.3"
+  },
+  "peerDependencies": {
+    "next": ">=13.4",
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.8"
   }
 }
