@@ -1,10 +1,10 @@
 import {type ReactNode} from 'react'
 import 'server-only'
-import useI18n from './useI18n'
+import {resolveServerI18n} from './utils'
 import Translatable = I18n.Translatable
 
 export default async function T({children}: {children: NonNullable<ReactNode> | NonNullable<ReactNode>[]}) {
-  const {dict} = useI18n()
+  const {dict} = resolveServerI18n()
   const html = typeof children === 'string' ? children : await renderToStaticMarkup(children)
   const translatedHtml = dict[html as Translatable] as TrustedHTML
   return <span dangerouslySetInnerHTML={{__html: translatedHtml}} />
@@ -17,7 +17,8 @@ export default async function T({children}: {children: NonNullable<ReactNode> | 
 type Children = NonNullable<ReactNode> | NonNullable<ReactNode>[]
 
 /**
- * TODO: Use top-level `await` when it was stable in Webpack: https://webpack.js.org/configuration/experiments/#experimentstoplevelawait
+ * TODO: Use top-level `await` when it was stable in Webpack:
+ * https://webpack.js.org/configuration/experiments/#experimentstoplevelawait
  * @see https://github.com/vercel/next.js/issues/43810#issuecomment-1341136525
  */
 const renderToStaticMarkup = async (component: Children) =>

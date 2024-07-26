@@ -1,6 +1,6 @@
 {
   "name": "@smart-i18n/next",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Smart i18n library for Next.js",
   "keywords": [
     "i18n",
@@ -39,16 +39,7 @@
       "react-server": "./dist/server/index.js",
       "default": "./dist/client/index.js"
     },
-    "./Locale": "./dist/Locale.js",
-    "./client": "./dist/client/index.js",
-    "./utils": "./dist/utils.js",
-    "./init": "./dist/init.js",
-    "./config": "./dist/config.js",
     "./I18nProvider": "./dist/client/I18nProvider.js",
-    "./useI18n": {
-      "react-server": "./dist/server/useI18n.js",
-      "default": "./dist/client/useI18n.js"
-    },
     "./Link": {
       "react-server": "./dist/server/Link.js",
       "default": "./dist/client/Link.js"
@@ -57,10 +48,11 @@
       "react-server": "./dist/server/withTranslation.js",
       "default": "./dist/client/withTranslation.js"
     },
-    "./i18n-context": {
-      "react-server": "./dist/server/i18n-context.js",
-      "default": "./dist/client/i18n-context.js"
-    }
+    "./init": "./dist/init.js",
+    "./config": "./dist/config.js",
+    "./utils": "./dist/utils.js",
+    "./server/utils": "./dist/server/utils.js",
+    "./Locale": "./dist/Locale.js"
   },
   "files": [
     "types.d.ts",

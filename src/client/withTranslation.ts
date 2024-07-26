@@ -1,11 +1,10 @@
 'use client'
 import NxLink from 'next/link'
-import type {FC} from 'react'
-import {Children, createElement, isValidElement} from 'react'
+import {Children, createElement, FC, isValidElement, use} from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
-import {Attributes, TranslatableHtmlTags} from '../models'
+import i18n from '.'
+import type {Attributes, TranslatableHtmlTags} from '../models'
 import Link from './Link'
-import useI18n from './useI18n'
 import Translatable = I18n.Translatable
 
 export const A = withTranslation('a')
@@ -40,7 +39,7 @@ function withTranslation<P>(Component: FC<P>, defProps?: Partial<P>): FC<P>
 function withTranslation<T extends TranslatableHtmlTags>(htmlElement: T, defProps?: Attributes<T>): FC<Attributes<T>>
 function withTranslation(htmlElementOrComponent: TranslatableHtmlTags | FC, defProps: object = {}): FC {
   return function WithTranslation({children, ...props}: {children?: unknown}) {
-    const {dict} = useI18n()
+    const {dict} = use(i18n)
     return createElement(htmlElementOrComponent, {
       ...defProps,
       ...props, // @ts-expect-error // TODO: Try to fix this error

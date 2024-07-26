@@ -1,14 +1,14 @@
 'use client'
 import {usePathname} from 'next/navigation'
 import type {ReactNode} from 'react'
-import {createContext, useLayoutEffect, useMemo} from 'react'
-import type {I18nContext as TI18nContext} from '../models'
+import {useLayoutEffect, useMemo} from 'react'
 import {createTranslator} from '../translator'
 import {createIdentityFallbackDictionary, createLocale, extractLocaleParamFromPathname} from '../utils'
 import {cookies} from '../utils/cookie'
+import {default as I18nContext} from './index'
 import Dict = I18n.Dict
 
-export const I18nContext = createContext<TI18nContext>({} as never)
+export {I18nContext}
 
 export default function I18nProvider({
   dict: rawDict, // See comments for `identityFallbackDictionary` below

@@ -1,6 +1,7 @@
 'use client'
 import NxLink from 'next/link'
-import useI18n from './useI18n'
+import {use} from 'react'
+import i18n from '.'
 import LocaleParam = I18n.LocaleParam
 
 export default function Link({
@@ -8,11 +9,10 @@ export default function Link({
   locale: localeParam,
   ...props
 }: Parameters<typeof NxLink>[0] & {locale?: LocaleParam}) {
-  const {localeParam: currentLocaleParam} = useI18n()
   return (
     <NxLink
       {...props}
-      href={(href as string).startsWith('/') ? `/${localeParam ?? currentLocaleParam}` + href : href}
+      href={(href as string).startsWith('/') ? `/${localeParam ?? use(i18n).localeParam}` + href : href}
     />
   )
 }

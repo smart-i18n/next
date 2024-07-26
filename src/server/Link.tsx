@@ -1,5 +1,5 @@
 import NxLink from 'next/link'
-import useI18n from './useI18n'
+import {resolveServerI18n} from './utils'
 import LocaleParam = I18n.LocaleParam
 
 export default function Link({
@@ -10,7 +10,7 @@ export default function Link({
   return (
     <NxLink
       {...props}
-      href={(href as string).startsWith('/') ? `/${localeParam ?? useI18n().localeParam}` + href : href}
+      href={(href as string).startsWith('/') ? `/${localeParam ?? resolveServerI18n().localeParam}` + href : href}
     />
   )
 }

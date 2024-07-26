@@ -1,8 +1,8 @@
 'use client'
 import {usePathname as useNxPathname} from 'next/navigation'
-import useI18n from './useI18n'
+import {use} from 'react'
+import i18n from './'
 
 export default function usePathname() {
-  const {localeParam} = useI18n()
-  return useNxPathname().replace(new RegExp(`^/${localeParam}(?:/|$)`), '/')
+  return useNxPathname().replace(new RegExp(`^/${use(i18n).localeParam}(?:/|$)`), '/')
 }

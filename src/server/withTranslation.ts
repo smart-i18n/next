@@ -3,9 +3,9 @@ import type {FC} from 'react'
 import {Children, createElement, isValidElement} from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
 import 'server-only'
-import {Attributes, TranslatableHtmlTags} from '../models'
+import type {Attributes, TranslatableHtmlTags} from '../models'
 import Link from './Link'
-import useI18n from './useI18n'
+import {resolveServerI18n} from './utils'
 import Translatable = I18n.Translatable
 
 export const A = withTranslation('a')
@@ -40,7 +40,7 @@ function withTranslation<P>(Component: FC<P>, defProps?: Partial<P>): FC<P>
 function withTranslation<T extends TranslatableHtmlTags>(htmlElement: T, defProps?: Attributes<T>): FC<Attributes<T>>
 function withTranslation(htmlElementOrComponent: TranslatableHtmlTags | FC, defProps: object = {}): FC {
   return function WithTranslation({children, ...props}: {children?: unknown}) {
-    const {dict} = useI18n()
+    const {dict} = resolveServerI18n()
     return createElement(htmlElementOrComponent, {
       ...defProps,
       ...props, // @ts-expect-error: "Object literal may only specify known properties, and `dangerouslySetInnerHTML` does not exist in type `Attributes`"

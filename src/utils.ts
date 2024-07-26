@@ -3,7 +3,7 @@ import type {ReactElement} from 'react'
 import {Children, isValidElement} from 'react'
 import Locale from './Locale'
 import {BASE_LOCALE_CODE, I18N_MODEL} from './config'
-import {I18nModel} from './models'
+import type {I18nModel} from './models'
 import Dict = I18n.Dict
 import Dictionary = I18n.Dictionary
 import Translatable = I18n.Translatable
