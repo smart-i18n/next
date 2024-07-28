@@ -1,8 +1,8 @@
 import {R, T, Y} from 'anstyle'
 import type {ReactElement} from 'react'
 import {Children, isValidElement} from 'react'
-import Locale from './Locale'
 import {BASE_LOCALE_CODE, I18N_MODEL} from './config'
+import Locale from './Locale'
 import type {I18nModel} from './models'
 import Dict = I18n.Dict
 import Dictionary = I18n.Dictionary
@@ -53,7 +53,7 @@ export {type Dictionary, type Translatable}
  * > Error: **Only plain objects, and a few built-ins, can be passed to Client Components from Server Components.**
  * > Classes or null prototypes are not supported.
  */
-export function extractSerializableLocale(locale: Locale) {
+export function extractSerializableLocale(locale: Locale): SerializableLocale {
   const {number, date, time, dateTime, collator, list, plural, relativeTime, ...serializableLocale} = locale
 
   for (const [property] of Object.entries(Object.getOwnPropertyDescriptors(Intl.Locale.prototype)).filter(
@@ -63,7 +63,10 @@ export function extractSerializableLocale(locale: Locale) {
 
   return serializableLocale
 }
-export type SerializableLocale = ReturnType<typeof extractSerializableLocale>
+export type SerializableLocale = Omit<
+  Locale,
+  'number' | 'date' | 'time' | 'dateTime' | 'collator' | 'list' | 'plural' | 'relativeTime'
+>
 
 export const extractLocaleCodesFromI18nModel = (I18N_MODEL: I18nModel) =>
   Object.values(I18N_MODEL).flatMap(({localeCodes}) => localeCodes)

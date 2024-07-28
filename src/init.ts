@@ -14,20 +14,20 @@ import type {Config, I18nModel} from './models'
  * @param options.DEFAULT_LOCALE_PARAM To navigate if no explicit local-param entered by the user and no other way to
  *   recover/infer it.
  * @param options.dictionary
- * @param [options.getLocalParams]
+ * @param [options.getLocaleParams]
  */
 export function createConfig({
   I18N_MODEL: I18N_MODEL_ARG,
   BASE_LOCALE_CODE: BASE_LOCALE_CODE_ARG,
   DEFAULT_LOCALE_PARAM: DEFAULT_LOCALE_PARAM_ARG,
   dictionary: DICTIONARY_ARG,
-  getLocalParams = (LANGUAGES) => LANGUAGES,
+  getLocaleParams = (LANGUAGES) => LANGUAGES,
 }: {
   I18N_MODEL: I18nModel
   BASE_LOCALE_CODE: BaseLocaleCode
   DEFAULT_LOCALE_PARAM: LocaleParam
   dictionary: Dictionary
-  getLocalParams?: (LANGUAGES: readonly Lang[], LOCALE_CODES: readonly LocaleCode[]) => readonly LocaleParam[]
+  getLocaleParams?: (LANGUAGES: readonly Lang[], LOCALE_CODES: readonly LocaleCode[]) => readonly LocaleParam[]
 }): Config {
   const I18N_MODEL = I18N_MODEL_ARG
   const BASE_LOCALE_CODE = BASE_LOCALE_CODE_ARG
@@ -35,7 +35,7 @@ export function createConfig({
   const dictionary = DICTIONARY_ARG
   const LANGUAGES = Object.keys(I18N_MODEL) as Lang[]
   const LOCALE_CODES = Object.values(I18N_MODEL).flatMap(({localeCodes}) => localeCodes)
-  const LOCALE_PARAMS = getLocalParams(LANGUAGES, LOCALE_CODES)
+  const LOCALE_PARAMS = getLocaleParams(LANGUAGES, LOCALE_CODES)
   // const LOCALES = Object.fromEntries(
   //   Object.values(I18N_MODEL).flatMap(({localeCodes}) =>
   //     localeCodes.map((localeCode) => [localeCode, new Locale(localeCode)] as const),

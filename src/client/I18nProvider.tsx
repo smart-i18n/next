@@ -1,12 +1,13 @@
 'use client'
-import {usePathname} from 'next/navigation'
+import {I18nCtx as I18nContext} from '@smart-i18n/next'
+import {createIdentityFallbackDictionary, createLocale, extractLocaleParamFromPathname} from '@smart-i18n/next/utils'
+import {useParams, usePathname} from 'next/navigation'
 import type {ReactNode} from 'react'
 import {useLayoutEffect, useMemo} from 'react'
 import {createTranslator} from '../translator'
-import {createIdentityFallbackDictionary, createLocale, extractLocaleParamFromPathname} from '../utils'
 import {cookies} from '../utils/cookie'
-import {default as I18nContext} from './index'
 import Dict = I18n.Dict
+import LocaleParam = I18n.LocaleParam
 
 export {I18nContext}
 
@@ -18,7 +19,8 @@ export default function I18nProvider({
   children: ReactNode
 }) {
   const pathname = usePathname()
-  const localeParam = extractLocaleParamFromPathname(pathname)
+  const localeParam =
+    (useParams() as {localeParam?: LocaleParam}).localeParam ?? extractLocaleParamFromPathname(pathname)
   const locale = useMemo(() => createLocale(localeParam), [localeParam])
 
   const {dict, t} = useMemo(() => {

@@ -1,10 +1,9 @@
-import {type ReactNode} from 'react'
-import 'server-only'
-import {resolveServerI18n} from './utils'
+import i18n from '@smart-i18n/next'
+import {type ReactNode, use} from 'react'
 import Translatable = I18n.Translatable
 
 export default async function T({children}: {children: NonNullable<ReactNode> | NonNullable<ReactNode>[]}) {
-  const {dict} = resolveServerI18n()
+  const {dict} = use(i18n())
   const html = typeof children === 'string' ? children : await renderToStaticMarkup(children)
   const translatedHtml = dict[html as Translatable] as TrustedHTML
   return <span dangerouslySetInnerHTML={{__html: translatedHtml}} />

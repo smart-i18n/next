@@ -1,6 +1,6 @@
 {
   "name": "@smart-i18n/next",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Smart i18n library for Next.js",
   "keywords": [
     "i18n",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "author": "S. Mahdi Mir-Ismaili <s.m.mirismaili@gmail.com>",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && rm tsconfig.tsbuildinfo && tsc",
     "watch": "tsc --watch",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write .",
@@ -32,27 +32,22 @@
   },
   "sideEffects": false,
   "exports": {
-    "./default-types": {
-      "types": "./types.d.ts"
-    },
     ".": {
       "react-server": "./dist/server/index.js",
       "default": "./dist/client/index.js"
     },
     "./I18nProvider": "./dist/client/I18nProvider.js",
-    "./Link": {
-      "react-server": "./dist/server/Link.js",
-      "default": "./dist/client/Link.js"
-    },
-    "./withTranslation": {
-      "react-server": "./dist/server/withTranslation.js",
-      "default": "./dist/client/withTranslation.js"
-    },
+    "./Link": "./dist/Link.js",
+    "./withTranslation": "./dist/withTranslation.js",
     "./init": "./dist/init.js",
     "./config": "./dist/config.js",
     "./utils": "./dist/utils.js",
+    "./middleware-utils": "./dist/middleware-utils.js",
     "./server/utils": "./dist/server/utils.js",
-    "./Locale": "./dist/Locale.js"
+    "./Locale": "./dist/Locale.js",
+    "./default-types": {
+      "types": "./types.d.ts"
+    }
   },
   "files": [
     "types.d.ts",
@@ -60,7 +55,7 @@
   ],
   "dependencies": {
     "anstyle": "2.1.3",
-    "objectools": "^3.1.0"
+    "objectools": "3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
