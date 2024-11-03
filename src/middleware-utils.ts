@@ -20,4 +20,4 @@ export function handleRequest(request: NextRequest) {
   return {extendedHeaders: reqHeaders}
 }
 
-export const isRequestHandledByMiddleware = () => headers().has('x-locale-param')
+export const isRequestHandledByMiddleware = async () => (await headers()).has('x-locale-param')
